@@ -18,6 +18,7 @@
   },
   "build": {
     "appId": "com.bookstore.ordermanager",
+    "artifactName": "Bookstore-Order-Manager-Setup-${version}.${ext}",
     "productName": "Bookstore Order Manager",
     "directories": {
       "output": "dist-electron"
