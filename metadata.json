@@ -1,0 +1,5 @@
+{
+  "name": "Bookstore Order Manager",
+  "description": "نظام إدارة طلبات المكتبة مبني على React يحاكي بيئة Electron/SQLite. يتميز بتتبع العملاء والطلبات.",
+  "requestFramePermissions": []
+}
