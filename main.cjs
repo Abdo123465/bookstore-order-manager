@@ -154,6 +154,22 @@ function initDatabase() {
     console.error('Employees sort_order Migration Error:', err);
   }
 
+  // Migration: Add notes and block fields to customers if they don't exist
+  try {
+    const customerInfo = db.prepare("PRAGMA table_info(customers)").all();
+    if (!customerInfo.some(col => col.name === 'notes')) {
+      db.exec("ALTER TABLE customers ADD COLUMN notes TEXT");
+    }
+    if (!customerInfo.some(col => col.name === 'is_blocked')) {
+      db.exec("ALTER TABLE customers ADD COLUMN is_blocked INTEGER DEFAULT 0");
+    }
+    if (!customerInfo.some(col => col.name === 'block_reason')) {
+      db.exec("ALTER TABLE customers ADD COLUMN block_reason TEXT");
+    }
+  } catch (err) {
+    console.error('Customer Migration Error:', err);
+  }
+
   // Setup IPC handlers
   ipcMain.handle('db-query', (event, { sql, params }) => {
     try {
@@ -285,17 +301,29 @@ if (!gotTheLock) {
     try {
       initDatabase();
 
-      autoUpdater.checkForUpdatesAndNotify();
-
+      autoUpdater.on('checking-for-update', () => {
+        dialog.showMessageBoxSync({ type: 'info', message: 'Checking for update...' });
+      });
+      autoUpdater.on('update-available', (info) => {
+        dialog.showMessageBoxSync({ type: 'info', message: 'Update available: ' + info.version });
+      });
+      autoUpdater.on('update-not-available', () => {
+        dialog.showMessageBoxSync({ type: 'info', message: 'Update not available.' });
+      });
+      autoUpdater.on('error', (err) => {
+        dialog.showMessageBoxSync({ type: 'error', message: 'Error in auto-updater: ' + err });
+      });
       autoUpdater.on('update-downloaded', () => {
         dialog.showMessageBoxSync({
           type: 'info',
           title: 'تحديث متاح',
-          message: 'تم تحميل نسخة جديدة من البرنامج. سيتم إعادة التشغيل الآن لتثبيتها.',
+          message: 'تم تحميل نسخة جديدة. سيتم إعادة التشغيل الآن لتثبيتها.',
           buttons: ['تثبيت وإعادة التشغيل']
         });
         autoUpdater.quitAndInstall();
       });
+
+      autoUpdater.checkForUpdatesAndNotify();
 
       await createWindow();
 
