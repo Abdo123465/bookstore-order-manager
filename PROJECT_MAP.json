@@ -92,14 +92,13 @@
     { "id": "E-34", "file": "main.cjs", "line": "autoUpdater", "supports": "Auto-Update: electron-updater integrated." }
   ],
   "build_state": {
-    "last_successful_build": "2026-08-14 (Pending rebuild for Customer Export)",
-    "artifact": "dist-electron/win-unpacked (Directory) / NSIS Setup",
+    "last_successful_build": "2026-09-20 (v1.8.0 NSIS — Setup 111,512,651 bytes)",
+    "artifact": "dist-electron/Bookstore-Order-Manager-Setup-1.8.0.exe + latest.yml",
     "contains_tasks": ["Task 1", "Task 2", "Task 3", "Task 4", "Task 5", "Task 6", "Auto-Update Setup", "Supabase Sync", "Fast-Track (Customer Export)"],
     "does_not_contain": [],
     "known_build_issue": "GitHub repo must be Public for Auto-Update."
   },
   "pending_actions": [
-    "npx electron-builder --win nsis",
     "Create GitHub Release v1.8.0 with new setup.exe and latest.yml",
     "Deploy new EXE to other machines"
   ]
