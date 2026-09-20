@@ -1,113 +1,106 @@
 {
   "last_updated": "2026-08-14",
   "protocol_version": "3.2.0",
-  "project_summary": "Electron + React desktop application for managing bookstore orders. Supports local SQLite and cloud Supabase backends. Latest work: T-12 (Salesman Manifest Excel Export) + T-11 (deposits/invoice) + Fast-Track Fixes (search, layout, double submit, build dir).",
+  "project_summary": "Electron + React desktop app. Latest: Fast-Track (Export Customers to Excel with Colors).",
   "files": [
-    { "path": "types.ts", "role": "Core TypeScript interfaces.", "last_verified_task": "T-11" },
-    { "path": "main.cjs", "role": "Electron main process.", "last_verified_task": "T-11" },
-    { "path": "supabase_schema.sql", "role": "Supabase schema.", "last_verified_task": "T-11" },
-    { "path": "services/storage.ts", "role": "Local/Cloud storage CRUD.", "last_verified_task": "T-05" },
-    { "path": "services/storage.cloud.ts", "role": "Pure Supabase storage CRUD.", "last_verified_task": "T-05" },
-    { "path": "services/reference-cache.ts", "role": "Caches reference data.", "last_verified_task": "T-05" },
-    { "path": "services/order.service.ts", "role": "Data layer (local SQLite).", "last_verified_task": "T-11" },
-    { "path": "services/order.service.cloud.ts", "role": "Data layer (Supabase).", "last_verified_task": "T-11" },
-    { "path": "services/receipt-print.ts", "role": "Thermal receipt HTML generator.", "last_verified_task": "T-11" },
-    { "path": "services/order-export.ts", "role": "Export utilities. T-12: Added exportManifestToExcel (groups pending items into Excel). Removed PDF export logic.", "last_verified_task": "T-12" },
-    { "path": "components/SettingsPanel.tsx", "role": "Admin settings UI.", "last_verified_task": "T-05" },
-    { "path": "components/UnifiedOrderForm.tsx", "role": "New order form.", "last_verified_task": "Fast-Track Fix (Double Submit)" },
-    { "path": "components/EditOrderModal.tsx", "role": "Order edit form.", "last_verified_task": "T-11" },
-    { "path": "components/Dashboard.tsx", "role": "Stats dashboard.", "last_verified_task": "T-09" },
-    { "path": "components/OrderTable.tsx", "role": "Orders table.", "last_verified_task": "T-11" },
-    { "path": "components/OrderList.tsx", "role": "Orders list container. T-12: 'تقرير المندوب' button now calls exportManifestToExcel instead of PDF. Hidden manifest div removed.", "last_verified_task": "T-12" },
-    { "path": "components/templates/ProfessionalReport.tsx", "role": "Per-order detailed PDF report.", "last_verified_task": "T-11" },
-    { "path": "components/templates/BatchReport.tsx", "role": "Batch PDF report.", "last_verified_task": "T-11" },
-    { "path": "components/templates/SalesmanManifest.tsx", "role": "Unused component (legacy PDF manifest). Safe to delete in post-season cleanup.", "last_verified_task": "T-12" },
-    { "path": "package.json", "role": "Project config. Build script changed to dir (unpacked). postinstall added for electron-builder install-app-deps.", "last_verified_task": "Fast-Track Fix (Build Dir)" }
+    { "path": "types.ts", "role": "Core TS interfaces.", "last_verified_task": "Task 4" },
+    { "path": "main.cjs", "role": "Electron main process.", "last_verified_task": "Auto-Update Setup" },
+    { "path": "supabase_schema.sql", "role": "Supabase schema. Manually updated.", "last_verified_task": "Supabase Sync" },
+    { "path": "services/customer.service.ts", "role": "Customer CRUD.", "last_verified_task": "Task 4" },
+    { "path": "services/order-export.ts", "role": "Export utilities. Fast-Track: Added exportCustomersToExcel with status coloring.", "last_verified_task": "Fast-Track (Customer Export)" },
+    { "path": "components/UnifiedOrderForm.tsx", "role": "New order form.", "last_verified_task": "Task 4" },
+    { "path": "components/OrderList.tsx", "role": "Orders list container.", "last_verified_task": "Task 2" },
+    { "path": "components/OrderFilters.tsx", "role": "Filters UI.", "last_verified_task": "Task 2" },
+    { "path": "components/templates/ProfessionalReport.tsx", "role": "Per-order PDF.", "last_verified_task": "Task 1" },
+    { "path": "components/templates/BatchReport.tsx", "role": "Batch PDF.", "last_verified_task": "Task 1" },
+    { "path": "services/receipt-print.ts", "role": "Thermal receipt.", "last_verified_task": "Task 1" },
+    { "path": "components/CustomerList.tsx", "role": "Customer Management UI. Fast-Track: Added Export to Excel button.", "last_verified_task": "Fast-Track (Customer Export)" },
+    { "path": "package.json", "role": "Project config. Auto-update enabled.", "last_verified_task": "Auto-Update Setup" }
   ],
   "completed_tasks_recent": [
     {
-      "id": "Fast-Track Fix (Manifest Excel)",
-      "title": "Replace Salesman Manifest PDF with Excel Export to fix CSS breaking",
+      "id": "Fast-Track (Customer Export)",
+      "title": "Export Customers to Excel with Colors",
       "date": "2026-08-14",
-      "files_touched": ["services/order-export.ts", "components/OrderList.tsx"],
+      "files_touched": ["services/order-export.ts", "components/CustomerList.tsx"],
       "confidence_score": 100,
       "open_risks": [],
-      "rollback_ref": "Pre-Fast-Track Excel Fix"
+      "rollback_ref": "Pre-Fast-Track Customer Export"
     },
     {
-      "id": "Fast-Track Fix (Build Dir)",
-      "title": "Change build script from portable to dir + postinstall fix",
+      "id": "Supabase Sync",
+      "title": "Manually add invoice_number and block fields to live Supabase DB",
       "date": "2026-08-14",
-      "files_touched": ["package.json"],
+      "files_touched": ["supabase_schema.sql"],
       "confidence_score": 100,
       "open_risks": [],
-      "rollback_ref": "Pre-Fast-Track package.json"
+      "rollback_ref": "N/A (SQL ALTER)"
     },
     {
-      "id": "T-12",
-      "title": "Salesman Manifest Report (تقرير المندوب المجمّع)",
+      "id": "Auto-Update Setup",
+      "title": "Implement GitHub Auto-Update",
       "date": "2026-08-14",
-      "files_touched": ["components/templates/SalesmanManifest.tsx", "services/order-export.ts", "components/OrderList.tsx"],
+      "files_touched": ["main.cjs", "package.json"],
       "confidence_score": 100,
       "open_risks": [],
-      "rollback_ref": "Pre-T-12 state"
+      "rollback_ref": "Pre-Auto-Update"
     },
     {
-      "id": "Fast-Track Fix (Search)",
-      "title": "Universal search in OrderList (items included)",
+      "id": "Task 6",
+      "title": "Two-Sheet Manifest Report (Summary + Details)",
       "date": "2026-08-14",
-      "files_touched": ["components/OrderList.tsx"],
+      "files_touched": ["services/order-export.ts"],
       "confidence_score": 100,
       "open_risks": [],
-      "rollback_ref": "Pre-Fast-Track OrderList.tsx"
+      "rollback_ref": "Pre-Task 6"
     },
     {
-      "id": "Fast-Track Fix (Double Submit)",
-      "title": "Prevent double submission in UnifiedOrderForm",
+      "id": "Task 5",
+      "title": "Customer Management UI (Notes & Blocking)",
       "date": "2026-08-14",
-      "files_touched": ["components/UnifiedOrderForm.tsx"],
+      "files_touched": ["components/CustomerList.tsx"],
       "confidence_score": 100,
       "open_risks": [],
-      "rollback_ref": "Pre-Fast-Track UnifiedOrderForm.tsx"
+      "rollback_ref": "Pre-Task 5"
     },
     {
-      "id": "Fast-Track Fix (Layout)",
-      "title": "Fix hidden reports causing massive empty space",
+      "id": "Task 4",
+      "title": "Customer Notes & Blocking Backend",
       "date": "2026-08-14",
-      "files_touched": ["components/OrderList.tsx"],
+      "files_touched": ["types.ts", "main.cjs", "services/customer.service.ts", "components/UnifiedOrderForm.tsx"],
       "confidence_score": 100,
       "open_risks": [],
-      "rollback_ref": "Pre-Fast-Track OrderList.tsx"
+      "rollback_ref": "Pre-Task 4"
     },
     {
-      "id": "T-11",
-      "title": "Per-book deposit distribution + manual excess + invoice + legacy protection",
+      "id": "Task 3",
+      "title": "New Salesman Manifest Excel Layout",
       "date": "2026-08-14",
-      "files_touched": ["11 files"],
+      "files_touched": ["services/order-export.ts"],
       "confidence_score": 100,
-      "open_risks": ["Live Supabase schema invoice_number column needs manual verification"],
-      "rollback_ref": "Pre-T-11 state"
+      "open_risks": [],
+      "rollback_ref": "Pre-Task 3 state"
     }
   ],
-  "completed_tasks_archive_summary": "T-08..T-11: deposits, invoices, layout fixes. T-12: Salesman Manifest report (converted to Excel). Fast-Track Fixes: search, double submit, build dir, manifest excel.",
+  "completed_tasks_archive_summary": "Roadmap completed: Report Dates, Filters, Manifest Excel (Two-Sheet, colors, sorting), Customer Blocking (Backend, UI, Supabase), GitHub Auto-Update, Customer Export.",
   "risk_register": [],
   "evidence_log_recent": [
-    { "id": "E-31", "file": "services/order-export.ts", "line": "exportManifestToExcel", "supports": "Fast-Track Fix: Aggregates pending books and exports to Excel to avoid PDF CSS breaking." },
-    { "id": "E-30", "file": "components/templates/SalesmanManifest.tsx", "line": "Unused", "supports": "Fast-Track Fix: PDF component replaced by Excel export." },
-    { "id": "E-29", "file": "package.json", "line": "scripts", "supports": "Fast-Track Fix: build:dir + postinstall for native deps." },
-    { "id": "E-28", "file": "services/order-export.ts", "line": "manifestData logic", "supports": "T-12: Hierarchical grouping of pending items only." },
-    { "id": "E-27", "file": "components/OrderList.tsx", "line": "filteredOrders", "supports": "Fast-Track Fix: search includes order.items." }
+    { "id": "E-38", "file": "services/order-export.ts", "line": "exportCustomersToExcel", "supports": "Fast-Track: Export customers to Excel with status-based coloring." },
+    { "id": "E-37", "file": "supabase_schema.sql", "line": "ALTER TABLE customers", "supports": "Supabase Sync: Added block/notes columns." },
+    { "id": "E-36", "file": "services/order-export.ts", "line": "exportManifestToExcel", "supports": "Task 6: Two-Sheet workbook." },
+    { "id": "E-35", "file": "services/order-export.ts", "line": "gradeColorMap", "supports": "Fast-Track: Dynamic color assignment." },
+    { "id": "E-34", "file": "main.cjs", "line": "autoUpdater", "supports": "Auto-Update: electron-updater integrated." }
   ],
   "build_state": {
-    "last_successful_build": "2026-08-14 (Pending rebuild for Excel Manifest)",
-    "artifact": "dist-electron/win-unpacked (Directory)",
-    "contains_tasks": ["T-05", "T-06", "T-07", "T-08", "T-09", "T-10", "T-11", "Fast-Track Fixes", "T-12"],
+    "last_successful_build": "2026-08-14 (Pending rebuild for Customer Export)",
+    "artifact": "dist-electron/win-unpacked (Directory) / NSIS Setup",
+    "contains_tasks": ["Task 1", "Task 2", "Task 3", "Task 4", "Task 5", "Task 6", "Auto-Update Setup", "Supabase Sync", "Fast-Track (Customer Export)"],
     "does_not_contain": [],
-    "known_build_issue": "GitHub network timeout during electron download. Use VPN or Administrator mode if needed."
+    "known_build_issue": "GitHub repo must be Public for Auto-Update."
   },
   "pending_actions": [
-    "npm run build:dir (ensure network access to GitHub or use VPN)",
-    "Copy the generated win-unpacked folder to other machines",
-    "Manual verification of live Supabase orders schema for invoice_number column"
+    "npx electron-builder --win nsis",
+    "Create GitHub Release v1.8.0 with new setup.exe and latest.yml",
+    "Deploy new EXE to other machines"
   ]
 }
