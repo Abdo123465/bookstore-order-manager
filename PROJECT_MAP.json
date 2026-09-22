@@ -1,23 +1,32 @@
 {
   "last_updated": "2026-08-14",
   "protocol_version": "3.2.0",
-  "project_summary": "Electron + React desktop app. Latest: Fast-Track (Reservation Date in Reports).",
+  "project_summary": "Electron + React desktop app. Latest: Fast-Track (Aggregate Excel respects Status Filter).",
   "files": [
     { "path": "types.ts", "role": "Core TS interfaces.", "last_verified_task": "Task 4" },
     { "path": "main.cjs", "role": "Electron main process.", "last_verified_task": "Auto-Update Setup" },
     { "path": "supabase_schema.sql", "role": "Supabase schema. Manually updated.", "last_verified_task": "Supabase Sync" },
     { "path": "services/customer.service.ts", "role": "Customer CRUD.", "last_verified_task": "Task 4" },
-    { "path": "services/order-export.ts", "role": "Export utilities. Added exportCustomersToExcel.", "last_verified_task": "Fast-Track (Customer Export)" },
+    { "path": "services/order-export.ts", "role": "Export utilities. Fast-Track: Removed internal filters from exportOrdersToExcel to respect UI status filter.", "last_verified_task": "Fast-Track (Status Filter)" },
     { "path": "components/UnifiedOrderForm.tsx", "role": "New order form.", "last_verified_task": "Task 4" },
     { "path": "components/OrderList.tsx", "role": "Orders list container.", "last_verified_task": "Task 2" },
     { "path": "components/OrderFilters.tsx", "role": "Filters UI.", "last_verified_task": "Task 2" },
-    { "path": "components/templates/ProfessionalReport.tsx", "role": "Per-order PDF. Fast-Track: Shows receivedDate instead of createdAt/new Date().", "last_verified_task": "Fast-Track (Reservation Date)" },
-    { "path": "components/templates/BatchReport.tsx", "role": "Batch PDF. Fast-Track: Shows receivedDate in info box, print date in header.", "last_verified_task": "Fast-Track (Reservation Date)" },
-    { "path": "services/receipt-print.ts", "role": "Thermal receipt. Fast-Track: Shows receivedDate instead of createdAt.", "last_verified_task": "Fast-Track (Reservation Date)" },
-    { "path": "components/CustomerList.tsx", "role": "Customer Management UI. Added Export to Excel button.", "last_verified_task": "Fast-Track (Customer Export)" },
+    { "path": "components/templates/ProfessionalReport.tsx", "role": "Per-order PDF.", "last_verified_task": "Fast-Track (Reservation Date)" },
+    { "path": "components/templates/BatchReport.tsx", "role": "Batch PDF.", "last_verified_task": "Fast-Track (Reservation Date)" },
+    { "path": "services/receipt-print.ts", "role": "Thermal receipt.", "last_verified_task": "Fast-Track (Reservation Date)" },
+    { "path": "components/CustomerList.tsx", "role": "Customer Management UI.", "last_verified_task": "Fast-Track (Customer Export)" },
     { "path": "package.json", "role": "Project config. Auto-update enabled.", "last_verified_task": "Auto-Update Setup" }
   ],
   "completed_tasks_recent": [
+    {
+      "id": "Fast-Track (Status Filter)",
+      "title": "Fix Aggregate Excel to respect Status Filter",
+      "date": "2026-08-14",
+      "files_touched": ["services/order-export.ts"],
+      "confidence_score": 100,
+      "open_risks": [],
+      "rollback_ref": "Pre-Fast-Track Status Filter"
+    },
     {
       "id": "Fast-Track (Reservation Date)",
       "title": "Show Reservation Date instead of Report Issue Date in Reports",
@@ -53,28 +62,19 @@
       "confidence_score": 100,
       "open_risks": [],
       "rollback_ref": "Pre-Auto-Update"
-    },
-    {
-      "id": "Task 6",
-      "title": "Two-Sheet Manifest Report (Summary + Details)",
-      "date": "2026-08-14",
-      "files_touched": ["services/order-export.ts"],
-      "confidence_score": 100,
-      "open_risks": [],
-      "rollback_ref": "Pre-Task 6"
     }
   ],
-  "completed_tasks_archive_summary": "Roadmap completed: Report Dates, Filters, Manifest Excel (Two-Sheet), Customer Blocking, Auto-Update, Customer Export, Reservation Date fix.",
+  "completed_tasks_archive_summary": "Roadmap completed: Report Dates, Filters, Manifest Excel (Two-Sheet), Customer Blocking, Auto-Update, Customer Export, Reservation Date fix, Status Filter fix.",
   "risk_register": [],
   "evidence_log_recent": [
+    { "id": "E-40", "file": "services/order-export.ts", "line": "exportOrdersToExcel", "supports": "Fast-Track: Pass-through function, respects UI status filter." },
     { "id": "E-39", "file": "services/receipt-print.ts", "line": "buildReceiptHtml", "supports": "Fast-Track: Receipt shows receivedDate." },
     { "id": "E-38", "file": "services/order-export.ts", "line": "exportCustomersToExcel", "supports": "Fast-Track: Export customers to Excel." },
     { "id": "E-37", "file": "supabase_schema.sql", "line": "ALTER TABLE customers", "supports": "Supabase Sync." },
-    { "id": "E-36", "file": "services/order-export.ts", "line": "exportManifestToExcel", "supports": "Task 6: Two-Sheet workbook." },
-    { "id": "E-35", "file": "services/order-export.ts", "line": "gradeColorMap", "supports": "Dynamic color assignment." }
+    { "id": "E-36", "file": "services/order-export.ts", "line": "exportManifestToExcel", "supports": "Task 6: Two-Sheet workbook." }
   ],
   "build_state": {
-    "last_successful_build": "2026-08-14 (Pending rebuild for Reservation Date)",
+    "last_successful_build": "2026-08-14 (Pending rebuild for Status Filter)",
     "artifact": "dist-electron/win-unpacked (Directory) / NSIS Setup",
     "contains_tasks": ["Task 1", "Task 2", "Task 3", "Task 4", "Task 5", "Task 6", "Auto-Update Setup", "Supabase Sync", "Fast-Track Fixes"],
     "does_not_contain": [],
@@ -82,7 +82,7 @@
   },
   "pending_actions": [
     "npx electron-builder --win nsis",
-    "Create GitHub Release v1.9.0 with new setup.exe and latest.yml",
+    "Create GitHub Release v2.0.0 with new setup.exe and latest.yml",
     "Deploy new EXE to other machines"
   ]
 }
