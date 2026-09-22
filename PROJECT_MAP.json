@@ -1,23 +1,32 @@
 {
   "last_updated": "2026-08-14",
   "protocol_version": "3.2.0",
-  "project_summary": "Electron + React desktop app. Latest: Fast-Track (Export Customers to Excel with Colors).",
+  "project_summary": "Electron + React desktop app. Latest: Fast-Track (Reservation Date in Reports).",
   "files": [
     { "path": "types.ts", "role": "Core TS interfaces.", "last_verified_task": "Task 4" },
     { "path": "main.cjs", "role": "Electron main process.", "last_verified_task": "Auto-Update Setup" },
     { "path": "supabase_schema.sql", "role": "Supabase schema. Manually updated.", "last_verified_task": "Supabase Sync" },
     { "path": "services/customer.service.ts", "role": "Customer CRUD.", "last_verified_task": "Task 4" },
-    { "path": "services/order-export.ts", "role": "Export utilities. Fast-Track: Added exportCustomersToExcel with status coloring.", "last_verified_task": "Fast-Track (Customer Export)" },
+    { "path": "services/order-export.ts", "role": "Export utilities. Added exportCustomersToExcel.", "last_verified_task": "Fast-Track (Customer Export)" },
     { "path": "components/UnifiedOrderForm.tsx", "role": "New order form.", "last_verified_task": "Task 4" },
     { "path": "components/OrderList.tsx", "role": "Orders list container.", "last_verified_task": "Task 2" },
     { "path": "components/OrderFilters.tsx", "role": "Filters UI.", "last_verified_task": "Task 2" },
-    { "path": "components/templates/ProfessionalReport.tsx", "role": "Per-order PDF.", "last_verified_task": "Task 1" },
-    { "path": "components/templates/BatchReport.tsx", "role": "Batch PDF.", "last_verified_task": "Task 1" },
-    { "path": "services/receipt-print.ts", "role": "Thermal receipt.", "last_verified_task": "Task 1" },
-    { "path": "components/CustomerList.tsx", "role": "Customer Management UI. Fast-Track: Added Export to Excel button.", "last_verified_task": "Fast-Track (Customer Export)" },
+    { "path": "components/templates/ProfessionalReport.tsx", "role": "Per-order PDF. Fast-Track: Shows receivedDate instead of createdAt/new Date().", "last_verified_task": "Fast-Track (Reservation Date)" },
+    { "path": "components/templates/BatchReport.tsx", "role": "Batch PDF. Fast-Track: Shows receivedDate in info box, print date in header.", "last_verified_task": "Fast-Track (Reservation Date)" },
+    { "path": "services/receipt-print.ts", "role": "Thermal receipt. Fast-Track: Shows receivedDate instead of createdAt.", "last_verified_task": "Fast-Track (Reservation Date)" },
+    { "path": "components/CustomerList.tsx", "role": "Customer Management UI. Added Export to Excel button.", "last_verified_task": "Fast-Track (Customer Export)" },
     { "path": "package.json", "role": "Project config. Auto-update enabled.", "last_verified_task": "Auto-Update Setup" }
   ],
   "completed_tasks_recent": [
+    {
+      "id": "Fast-Track (Reservation Date)",
+      "title": "Show Reservation Date instead of Report Issue Date in Reports",
+      "date": "2026-08-14",
+      "files_touched": ["services/receipt-print.ts", "components/templates/ProfessionalReport.tsx", "components/templates/BatchReport.tsx"],
+      "confidence_score": 100,
+      "open_risks": [],
+      "rollback_ref": "Pre-Fast-Track Reservation Date"
+    },
     {
       "id": "Fast-Track (Customer Export)",
       "title": "Export Customers to Excel with Colors",
@@ -53,53 +62,27 @@
       "confidence_score": 100,
       "open_risks": [],
       "rollback_ref": "Pre-Task 6"
-    },
-    {
-      "id": "Task 5",
-      "title": "Customer Management UI (Notes & Blocking)",
-      "date": "2026-08-14",
-      "files_touched": ["components/CustomerList.tsx"],
-      "confidence_score": 100,
-      "open_risks": [],
-      "rollback_ref": "Pre-Task 5"
-    },
-    {
-      "id": "Task 4",
-      "title": "Customer Notes & Blocking Backend",
-      "date": "2026-08-14",
-      "files_touched": ["types.ts", "main.cjs", "services/customer.service.ts", "components/UnifiedOrderForm.tsx"],
-      "confidence_score": 100,
-      "open_risks": [],
-      "rollback_ref": "Pre-Task 4"
-    },
-    {
-      "id": "Task 3",
-      "title": "New Salesman Manifest Excel Layout",
-      "date": "2026-08-14",
-      "files_touched": ["services/order-export.ts"],
-      "confidence_score": 100,
-      "open_risks": [],
-      "rollback_ref": "Pre-Task 3 state"
     }
   ],
-  "completed_tasks_archive_summary": "Roadmap completed: Report Dates, Filters, Manifest Excel (Two-Sheet, colors, sorting), Customer Blocking (Backend, UI, Supabase), GitHub Auto-Update, Customer Export.",
+  "completed_tasks_archive_summary": "Roadmap completed: Report Dates, Filters, Manifest Excel (Two-Sheet), Customer Blocking, Auto-Update, Customer Export, Reservation Date fix.",
   "risk_register": [],
   "evidence_log_recent": [
-    { "id": "E-38", "file": "services/order-export.ts", "line": "exportCustomersToExcel", "supports": "Fast-Track: Export customers to Excel with status-based coloring." },
-    { "id": "E-37", "file": "supabase_schema.sql", "line": "ALTER TABLE customers", "supports": "Supabase Sync: Added block/notes columns." },
+    { "id": "E-39", "file": "services/receipt-print.ts", "line": "buildReceiptHtml", "supports": "Fast-Track: Receipt shows receivedDate." },
+    { "id": "E-38", "file": "services/order-export.ts", "line": "exportCustomersToExcel", "supports": "Fast-Track: Export customers to Excel." },
+    { "id": "E-37", "file": "supabase_schema.sql", "line": "ALTER TABLE customers", "supports": "Supabase Sync." },
     { "id": "E-36", "file": "services/order-export.ts", "line": "exportManifestToExcel", "supports": "Task 6: Two-Sheet workbook." },
-    { "id": "E-35", "file": "services/order-export.ts", "line": "gradeColorMap", "supports": "Fast-Track: Dynamic color assignment." },
-    { "id": "E-34", "file": "main.cjs", "line": "autoUpdater", "supports": "Auto-Update: electron-updater integrated." }
+    { "id": "E-35", "file": "services/order-export.ts", "line": "gradeColorMap", "supports": "Dynamic color assignment." }
   ],
   "build_state": {
-    "last_successful_build": "2026-09-20 (v1.8.0 NSIS — Setup 111,512,651 bytes)",
-    "artifact": "dist-electron/Bookstore-Order-Manager-Setup-1.8.0.exe + latest.yml",
-    "contains_tasks": ["Task 1", "Task 2", "Task 3", "Task 4", "Task 5", "Task 6", "Auto-Update Setup", "Supabase Sync", "Fast-Track (Customer Export)"],
+    "last_successful_build": "2026-08-14 (Pending rebuild for Reservation Date)",
+    "artifact": "dist-electron/win-unpacked (Directory) / NSIS Setup",
+    "contains_tasks": ["Task 1", "Task 2", "Task 3", "Task 4", "Task 5", "Task 6", "Auto-Update Setup", "Supabase Sync", "Fast-Track Fixes"],
     "does_not_contain": [],
     "known_build_issue": "GitHub repo must be Public for Auto-Update."
   },
   "pending_actions": [
-    "Create GitHub Release v1.8.0 with new setup.exe and latest.yml",
+    "npx electron-builder --win nsis",
+    "Create GitHub Release v1.9.0 with new setup.exe and latest.yml",
     "Deploy new EXE to other machines"
   ]
 }
