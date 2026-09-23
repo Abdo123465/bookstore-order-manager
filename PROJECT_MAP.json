@@ -1,23 +1,33 @@
 {
   "last_updated": "2026-08-14",
   "protocol_version": "3.2.0",
-  "project_summary": "Electron + React desktop app. Latest: Task 7 (Customer Autocomplete & Smart Merge).",
+  "project_summary": "Electron + React desktop app. Latest: Task 8 (Customer Profile View).",
   "files": [
     { "path": "types.ts", "role": "Core TS interfaces.", "last_verified_task": "Task 4" },
     { "path": "main.cjs", "role": "Electron main process.", "last_verified_task": "Auto-Update Setup" },
     { "path": "supabase_schema.sql", "role": "Supabase schema. Manually updated.", "last_verified_task": "Supabase Sync" },
     { "path": "services/customer.service.ts", "role": "Customer CRUD.", "last_verified_task": "Task 4" },
     { "path": "services/order-export.ts", "role": "Export utilities. Pass-through function, respects UI status filter.", "last_verified_task": "Fast-Track (Status Filter)" },
-    { "path": "components/UnifiedOrderForm.tsx", "role": "New order form. Task 7: Added customer autocomplete (datalist) and smart merge logic to append items to existing pending orders.", "last_verified_task": "Task 7" },
+    { "path": "components/UnifiedOrderForm.tsx", "role": "New order form. Task 7: Autocomplete and smart merge.", "last_verified_task": "Task 7" },
     { "path": "components/OrderList.tsx", "role": "Orders list container.", "last_verified_task": "Task 2" },
     { "path": "components/OrderFilters.tsx", "role": "Filters UI.", "last_verified_task": "Task 2" },
     { "path": "components/templates/ProfessionalReport.tsx", "role": "Per-order PDF.", "last_verified_task": "Fast-Track (Reservation Date)" },
     { "path": "components/templates/BatchReport.tsx", "role": "Batch PDF.", "last_verified_task": "Fast-Track (Reservation Date)" },
     { "path": "services/receipt-print.ts", "role": "Thermal receipt.", "last_verified_task": "Fast-Track (Reservation Date)" },
-    { "path": "components/CustomerList.tsx", "role": "Customer Management UI.", "last_verified_task": "Fast-Track (Customer Export)" },
+    { "path": "components/AdminPanel.tsx", "role": "Admin Panel. Task 8: Passes orders to CustomerList.", "last_verified_task": "Task 8" },
+    { "path": "components/CustomerList.tsx", "role": "Customer Management UI. Task 8: Added Customer Profile Modal with total deposit and order history.", "last_verified_task": "Task 8" },
     { "path": "package.json", "role": "Project config. Auto-update enabled.", "last_verified_task": "Auto-Update Setup" }
   ],
   "completed_tasks_recent": [
+    {
+      "id": "Task 8",
+      "title": "Customer Profile View",
+      "date": "2026-08-14",
+      "files_touched": ["components/AdminPanel.tsx", "components/CustomerList.tsx"],
+      "confidence_score": 100,
+      "open_risks": [],
+      "rollback_ref": "Pre-Task 8"
+    },
     {
       "id": "Task 7",
       "title": "Customer Autocomplete & Smart Merge",
@@ -53,35 +63,27 @@
       "confidence_score": 100,
       "open_risks": [],
       "rollback_ref": "Pre-Fast-Track Customer Export"
-    },
-    {
-      "id": "Supabase Sync",
-      "title": "Manually add invoice_number and block fields to live Supabase DB",
-      "date": "2026-08-14",
-      "files_touched": ["supabase_schema.sql"],
-      "confidence_score": 100,
-      "open_risks": [],
-      "rollback_ref": "N/A (SQL ALTER)"
     }
   ],
-  "completed_tasks_archive_summary": "Roadmap completed: Report Dates, Filters, Manifest Excel (Two-Sheet), Customer Blocking, Auto-Update, Customer Export, Reservation Date fix, Status Filter fix, Smart Merge.",
+  "completed_tasks_archive_summary": "Roadmap completed: Report Dates, Filters, Manifest Excel (Two-Sheet), Customer Blocking, Auto-Update, Customer Export, Reservation Date fix, Status Filter fix, Smart Merge, Customer Profile.",
   "risk_register": [],
   "evidence_log_recent": [
-    { "id": "E-41", "file": "components/UnifiedOrderForm.tsx", "line": "handleSubmit & datalist", "supports": "Task 7: Autocomplete and smart merge pending orders." },
+    { "id": "E-42", "file": "components/CustomerList.tsx", "line": "Profile Modal & totalDeposit", "supports": "Task 8: Customer profile view with total deposit and order history." },
+    { "id": "E-41", "file": "components/UnifiedOrderForm.tsx", "line": "handleSubmit & datalist", "supports": "Task 7: Autocomplete and smart merge." },
     { "id": "E-40", "file": "services/order-export.ts", "line": "exportOrdersToExcel", "supports": "Fast-Track: Pass-through function." },
     { "id": "E-39", "file": "services/receipt-print.ts", "line": "buildReceiptHtml", "supports": "Fast-Track: Receipt shows receivedDate." },
-    { "id": "E-38", "file": "services/order-export.ts", "line": "exportCustomersToExcel", "supports": "Fast-Track: Export customers to Excel." },
-    { "id": "E-37", "file": "supabase_schema.sql", "line": "ALTER TABLE customers", "supports": "Supabase Sync." }
+    { "id": "E-38", "file": "services/order-export.ts", "line": "exportCustomersToExcel", "supports": "Fast-Track: Export customers to Excel." }
   ],
   "build_state": {
-    "last_successful_build": "2026-09-23 (v2.1.0 NSIS — Setup 111,512,726 bytes)",
-    "artifact": "dist-electron/Bookstore-Order-Manager-Setup-2.1.0.exe + latest.yml",
-    "contains_tasks": ["Task 1", "Task 2", "Task 3", "Task 4", "Task 5", "Task 6", "Task 7", "Auto-Update Setup", "Supabase Sync", "Fast-Track Fixes"],
+    "last_successful_build": "2026-08-14 (Pending rebuild for Task 8)",
+    "artifact": "dist-electron/win-unpacked (Directory) / NSIS Setup",
+    "contains_tasks": ["Task 1", "Task 2", "Task 3", "Task 4", "Task 5", "Task 6", "Task 7", "Task 8", "Auto-Update Setup", "Supabase Sync", "Fast-Track Fixes"],
     "does_not_contain": [],
     "known_build_issue": "GitHub repo must be Public for Auto-Update."
   },
   "pending_actions": [
-    "Create GitHub Release v2.1.0 with new setup.exe and latest.yml",
+    "npx electron-builder --win nsis",
+    "Create GitHub Release v2.2.0 with new setup.exe and latest.yml",
     "Deploy new EXE to other machines"
   ]
 }
