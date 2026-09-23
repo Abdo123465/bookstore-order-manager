@@ -74,14 +74,13 @@
     { "id": "E-37", "file": "supabase_schema.sql", "line": "ALTER TABLE customers", "supports": "Supabase Sync." }
   ],
   "build_state": {
-    "last_successful_build": "2026-08-14 (Pending rebuild for Task 7)",
-    "artifact": "dist-electron/win-unpacked (Directory) / NSIS Setup",
+    "last_successful_build": "2026-09-23 (v2.1.0 NSIS — Setup 111,512,726 bytes)",
+    "artifact": "dist-electron/Bookstore-Order-Manager-Setup-2.1.0.exe + latest.yml",
     "contains_tasks": ["Task 1", "Task 2", "Task 3", "Task 4", "Task 5", "Task 6", "Task 7", "Auto-Update Setup", "Supabase Sync", "Fast-Track Fixes"],
     "does_not_contain": [],
     "known_build_issue": "GitHub repo must be Public for Auto-Update."
   },
   "pending_actions": [
-    "npx electron-builder --win nsis",
     "Create GitHub Release v2.1.0 with new setup.exe and latest.yml",
     "Deploy new EXE to other machines"
   ]
