@@ -1,7 +1,7 @@
 {
   "last_updated": "2026-08-14",
   "protocol_version": "3.2.0",
-  "project_summary": "Electron + React desktop app. Latest: Task 8 (Customer Profile View).",
+  "project_summary": "Electron + React desktop app. Latest: Fast-Track (Fix Order Details in Profile).",
   "files": [
     { "path": "types.ts", "role": "Core TS interfaces.", "last_verified_task": "Task 4" },
     { "path": "main.cjs", "role": "Electron main process.", "last_verified_task": "Auto-Update Setup" },
@@ -15,10 +15,19 @@
     { "path": "components/templates/BatchReport.tsx", "role": "Batch PDF.", "last_verified_task": "Fast-Track (Reservation Date)" },
     { "path": "services/receipt-print.ts", "role": "Thermal receipt.", "last_verified_task": "Fast-Track (Reservation Date)" },
     { "path": "components/AdminPanel.tsx", "role": "Admin Panel. Task 8: Passes orders to CustomerList.", "last_verified_task": "Task 8" },
-    { "path": "components/CustomerList.tsx", "role": "Customer Management UI. Task 8: Added Customer Profile Modal with total deposit and order history.", "last_verified_task": "Task 8" },
+    { "path": "components/CustomerList.tsx", "role": "Customer Management UI. Task 8: Profile Modal. Fast-Track: Fixed order details to list all items.", "last_verified_task": "Fast-Track (Order Details)" },
     { "path": "package.json", "role": "Project config. Auto-update enabled.", "last_verified_task": "Auto-Update Setup" }
   ],
   "completed_tasks_recent": [
+    {
+      "id": "Fast-Track (Order Details)",
+      "title": "Fix Order Details in Customer Profile to list all items",
+      "date": "2026-08-14",
+      "files_touched": ["components/CustomerList.tsx"],
+      "confidence_score": 100,
+      "open_risks": [],
+      "rollback_ref": "Pre-Fast-Track Order Details"
+    },
     {
       "id": "Task 8",
       "title": "Customer Profile View",
@@ -54,35 +63,27 @@
       "confidence_score": 100,
       "open_risks": [],
       "rollback_ref": "Pre-Fast-Track Reservation Date"
-    },
-    {
-      "id": "Fast-Track (Customer Export)",
-      "title": "Export Customers to Excel with Colors",
-      "date": "2026-08-14",
-      "files_touched": ["services/order-export.ts", "components/CustomerList.tsx"],
-      "confidence_score": 100,
-      "open_risks": [],
-      "rollback_ref": "Pre-Fast-Track Customer Export"
     }
   ],
-  "completed_tasks_archive_summary": "Roadmap completed: Report Dates, Filters, Manifest Excel (Two-Sheet), Customer Blocking, Auto-Update, Customer Export, Reservation Date fix, Status Filter fix, Smart Merge, Customer Profile.",
+  "completed_tasks_archive_summary": "Roadmap completed: Report Dates, Filters, Manifest Excel (Two-Sheet), Customer Blocking, Auto-Update, Customer Export, Reservation Date fix, Status Filter fix, Smart Merge, Customer Profile (with all items).",
   "risk_register": [],
   "evidence_log_recent": [
-    { "id": "E-42", "file": "components/CustomerList.tsx", "line": "Profile Modal & totalDeposit", "supports": "Task 8: Customer profile view with total deposit and order history." },
+    { "id": "E-43", "file": "components/CustomerList.tsx", "line": "Order details cell", "supports": "Fast-Track: Lists all items in order history with Arabic comma." },
+    { "id": "E-42", "file": "components/CustomerList.tsx", "line": "Profile Modal & totalDeposit", "supports": "Task 8: Customer profile view." },
     { "id": "E-41", "file": "components/UnifiedOrderForm.tsx", "line": "handleSubmit & datalist", "supports": "Task 7: Autocomplete and smart merge." },
     { "id": "E-40", "file": "services/order-export.ts", "line": "exportOrdersToExcel", "supports": "Fast-Track: Pass-through function." },
-    { "id": "E-39", "file": "services/receipt-print.ts", "line": "buildReceiptHtml", "supports": "Fast-Track: Receipt shows receivedDate." },
-    { "id": "E-38", "file": "services/order-export.ts", "line": "exportCustomersToExcel", "supports": "Fast-Track: Export customers to Excel." }
+    { "id": "E-39", "file": "services/receipt-print.ts", "line": "buildReceiptHtml", "supports": "Fast-Track: Receipt shows receivedDate." }
   ],
   "build_state": {
-    "last_successful_build": "2026-09-23 (v2.2.0 NSIS — Setup 111,513,288 bytes)",
-    "artifact": "dist-electron/Bookstore-Order-Manager-Setup-2.2.0.exe + latest.yml",
+    "last_successful_build": "2026-08-14 (Pending rebuild for Order Details fix)",
+    "artifact": "dist-electron/win-unpacked (Directory) / NSIS Setup",
     "contains_tasks": ["Task 1", "Task 2", "Task 3", "Task 4", "Task 5", "Task 6", "Task 7", "Task 8", "Auto-Update Setup", "Supabase Sync", "Fast-Track Fixes"],
     "does_not_contain": [],
     "known_build_issue": "GitHub repo must be Public for Auto-Update."
   },
   "pending_actions": [
-    "Create GitHub Release v2.2.0 with new setup.exe and latest.yml",
+    "npx electron-builder --win nsis",
+    "Create GitHub Release v2.3.0 with new setup.exe and latest.yml",
     "Deploy new EXE to other machines"
   ]
 }
